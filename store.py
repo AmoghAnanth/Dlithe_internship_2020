@@ -9,11 +9,12 @@ import pandas as pd
 import numpy as np
 #reading the file from folder
 data = pd.read_csv("C:/Users/Amogh A N/Desktop/workshop/Python_Dataset/assignment/store.csv")
-#data cleanising
-#drop not so important data
+
+#data processing
 data = data.iloc[:, np.r_[3,0:3,4]]
 data.info()
 df = pd.get_dummies(data, prefix=['reps', 'product','region'], columns=['reps', 'product','region'])
+
 #pictorial relation of data/data analysis
 import seaborn as sb
 sb.heatmap(df.corr(),annot=True,vmin=0.5,vmax=0.7,cmap='coolwarm',linewidth=3,linecolor='red')
@@ -31,6 +32,7 @@ y = df.iloc[:,0].values
 #class : train_test_split
 from sklearn.model_selection import train_test_split as tts
 x_train,x_test,y_train,y_test = tts(x,y,test_size=0.3,random_state=2500)
+
 #Algorithm selection
 #Linear regression
 #Library: sklearn
@@ -41,9 +43,7 @@ model_linreg = linreg()
 #train the model. Use fit(training arrays)
 model_linreg.fit(x_train,y_train)
 y_pred = model_linreg.predict(x_test)
-#check accuracy by giving x_test and y_test data
-accuracy = model_linreg.score(x_test,y_test)
-print("Linear Regression Accuracy:", accuracy)
+
 #Checking the accuracy
 #Library: sklearn
 #module : metrics
